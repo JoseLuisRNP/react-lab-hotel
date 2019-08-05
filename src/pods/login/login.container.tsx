@@ -11,7 +11,7 @@ import {
 import { validateCredentials } from "./login.api";
 import { loginFormValidation } from "./login.validation";
 import { FormValidationResult } from "lc-form-validation";
-import {CustomSnackbar, Variant} from 'common/components';
+import {CustomSnackbar, Variant} from 'common';
 
 interface Props extends RouteComponentProps {}
 
@@ -96,6 +96,13 @@ const LoginContainerInner = (props: Props) => {
       });
   };
 
+  const onSnackbarError = () => {
+    setSnackbarError({
+      ...snackbarError,
+      open: false
+    })
+  }
+
   return (
     <>
       <LoginComponent
@@ -107,11 +114,7 @@ const LoginContainerInner = (props: Props) => {
       <CustomSnackbar 
         open={snackbarError.open}
         message={snackbarError.message}
-        handleClose={()=> setSnackbarError({
-          ...snackbarError,
-          open:false
-        }          
-        )}
+        handleClose={onSnackbarError}
         variant={snackbarError.variant as Variant}
       />
     </>

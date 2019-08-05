@@ -16,7 +16,7 @@ interface RouterSwitchRoutes extends BaseRoutes {
 
 export const routerSwitchRoutes: RouterSwitchRoutes = {
   ...appBaseRoutes,
-  hotelEdit: `hotel-edit/:id`,
+  hotelEdit: `/hotel-edit/:id`,
 }
 
 interface RouterLinks extends BaseRoutes {

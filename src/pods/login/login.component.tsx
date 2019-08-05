@@ -3,7 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
-import {TextFieldForm} from 'common/components';
+import {TextFieldForm} from 'common';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import { CredentialsEntityVm, LoginFormErrors } from './login.vm';
 

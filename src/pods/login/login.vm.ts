@@ -1,5 +1,5 @@
 import { FieldValidationResult } from "lc-form-validation";
-import { Variant } from "common/components/customSnackbar.component";
+import { Variant } from "common/components/custom-snackbar.component";
 
 export interface CredentialsEntityVm {
   username: string;
@@ -20,5 +20,3 @@ export const createDefaultLoginFormErrors = () : LoginFormErrors => ({
   username: new FieldValidationResult(),
   password: new FieldValidationResult(),
 })
-
-//Crear vm para snackbar?

@@ -5,7 +5,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import InfoIcon from '@material-ui/icons/Info';
 import WarningIcon from '@material-ui/icons/Warning';
 import CloseIcon from '@material-ui/icons/Close';
-import { amber, green, red, indigo } from '@material-ui/core/colors';
+import { amber, green } from '@material-ui/core/colors';
 import clsx from 'clsx';
 
 
@@ -86,6 +86,10 @@ export const CustomSnackbar = (props: Props) => {
       />
     </Snackbar>
   )
+  
+  Snackbar.defaultProps = {
+    open: false,
     
+  }
   
 }

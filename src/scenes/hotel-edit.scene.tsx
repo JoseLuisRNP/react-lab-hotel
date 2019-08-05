@@ -1,8 +1,17 @@
-import * as React from 'react';
+import * as React from "react";
 
+import { AppLayout } from "layout";
+import { HotelEditContainer } from "pods/hotel-edit";
 
-export const HotelEditScene = () => {
-  return(
-    <h2>Hello from Hotel edit scene!</h2>    
+export const HotelEditScene = props => {
+  const { match } = props;
+  React.useEffect(() => {
+    console.log(match.params.id);
+  }, []);
+
+  return (
+    <AppLayout>
+      <HotelEditContainer hotelId={match.params.id}/>
+    </AppLayout>
   );
-}
+};
