@@ -8,7 +8,7 @@ import {
 } from "./hotel-edit.vm";
 import { editHotelFormValidation } from "./hotel-edit.validation";
 import { getHotelById } from "./hotel-edit.api";
-import { hotelEntityApiToVm } from "./hotel-edit.mapper";
+import { hotelEntityApiToVm, hotelEntityVmToApi } from "./hotel-edit.mapper";
 import { CustomSnackbar } from "common";
 import { FormValidationResult } from "lc-form-validation";
 import { RouteComponentProps, withRouter } from "react-router-dom";
@@ -33,18 +33,18 @@ const HotelEditContainerInner = (props: Props) => {
 
   const {hotelId, history} = props;
 
-  React.useEffect(() => {
+  React.useEffect(() => {    
     getHotelById(hotelId).then(result => {
       const hotelSelected = hotelEntityApiToVm(result);
       setHotel(hotelSelected);
-    });
+    });    
   }, []);
 
   const onUpdateHotelField = (fieldId: string, value: string | number) => {
     setHotel({
       ...hotel,
       [fieldId]: value
-    });
+    });    
   };
 
   const onSnackbarError = () => {
@@ -73,9 +73,10 @@ const HotelEditContainerInner = (props: Props) => {
   };
 
   const updateHotel = () => {
-    //As it doesn't match EntityApi's signature, the mapper(mapFromApiToVm) doesn't work correctly.
+    const hotelApi = hotelEntityVmToApi(hotel);
+    console.log(hotelApi);
     const putApiUrl = `${baseApirUrl}/api/hotels/${hotel.id}`;
-    Axios.put(putApiUrl, hotel, {headers: {"Content-Type": "application/json"}});
+    Axios.patch(putApiUrl, hotelApi, {headers: {"Content-Type": "application/json"}});
   }
 
   const showEditHotelFormErrors = (formValidationResult: FormValidationResult) => {

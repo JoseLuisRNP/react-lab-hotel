@@ -39,6 +39,15 @@ export interface HotelEntityApi {
   tripAdvisorRatingUrl: string;
 }
 
+export interface HotelEntityApiAsVm {
+  id: string;
+  thunbNailUrl: string;
+  name: string;
+  shortDescription: string;
+  hotelRating: number;
+  city: string;
+}
+
 const getHotelUri = `${baseApirUrl}/api/hotels/`;
 export const getHotelById = (id: string) => {
   const promise = new Promise<HotelEntityApi>((resolve, reject)=>

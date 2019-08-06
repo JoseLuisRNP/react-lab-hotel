@@ -1,5 +1,4 @@
 import { FieldValidationResult } from "lc-form-validation";
-import { LoginFormErrors } from "pods/login/login.vm";
 
 export interface HotelEntityVm {
   id: string;
@@ -19,11 +18,12 @@ export const createEmptyHotel = () => ({
   city: '',
 })
 
+
 export const cities = [
   'New York',
-  'Denver',
-  'Boston',
-  'Toronto',
+  'Seattle',
+  'Burlingame',
+  'Denver'
 ]
 
 export interface EditHotelFormErrors {
