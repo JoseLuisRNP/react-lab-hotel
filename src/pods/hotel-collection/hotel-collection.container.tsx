@@ -1,10 +1,13 @@
 import * as React from "react";
 import { HotelCollectionComponent } from "./hotel-collection.component";
 import { HotelEntityVm } from "./hotel-collection.vm";
-import { HotelEntityApi, getHotelCollection } from './hotel-collection.api';
+import {  getHotelCollection } from './hotel-collection.api';
 import { mapFromApiCollectionToVmCollection } from './hotel-collection.mapper';
 import {withRouter, RouteComponentProps} from 'react-router-dom';
 import {routerLinks} from 'core';
+
+import { trackPromise } from 'react-promise-tracker';
+import {LoadingIndicator} from 'common';
 
 interface Props extends RouteComponentProps{}
 
@@ -13,10 +16,12 @@ const HotelCollectionContainerInner = (props:Props) => {
   const {history} = props;
 
   React.useEffect(()=> {
-    getHotelCollection().then((result) => {
-      const hotelCollectionVm = mapFromApiCollectionToVmCollection(result);
-      setHotelCollection(hotelCollectionVm);
-    });
+    trackPromise(
+      getHotelCollection().then((result) => {
+        const hotelCollectionVm = mapFromApiCollectionToVmCollection(result);
+        setHotelCollection(hotelCollectionVm);
+      }));
+    
   }, [])
 
   const editHotel = (hotelId:string) => {
@@ -24,7 +29,10 @@ const HotelCollectionContainerInner = (props:Props) => {
   }
 
   return (
-    <HotelCollectionComponent hotelCollection={hotelCollection} editHotel={editHotel}/>
+    <>
+      <LoadingIndicator />
+      <HotelCollectionComponent hotelCollection={hotelCollection} editHotel={editHotel}/>
+    </>
   );
 }
 

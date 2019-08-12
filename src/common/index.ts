@@ -4,3 +4,4 @@ export * from './components/rating-form.component';
 export * from './components/select-field-form.component';
 export * from './components/text-area-form.component';
 export * from './custom-validators';
+export * from './components/loading-indicator.component';

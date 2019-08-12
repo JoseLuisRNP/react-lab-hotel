@@ -9,11 +9,12 @@ import {
 import { editHotelFormValidation } from "./hotel-edit.validation";
 import { getHotelById } from "./hotel-edit.api";
 import { hotelEntityApiToVm, hotelEntityVmToApi } from "./hotel-edit.mapper";
-import { CustomSnackbar } from "common";
+import { CustomSnackbar, LoadingIndicator } from "common";
 import { FormValidationResult } from "lc-form-validation";
 import { RouteComponentProps, withRouter } from "react-router-dom";
 import { routerLinks, baseApirUrl } from "core";
 import Axios from "axios";
+import { trackPromise } from 'react-promise-tracker';
 
 interface Props extends RouteComponentProps{
   hotelId: string;
@@ -63,9 +64,11 @@ const HotelEditContainerInner = (props: Props) => {
       formValidationResult: FormValidationResult
     ) => {
       if (formValidationResult.succeeded) {
-        updateHotel();
-        history.push(routerLinks.hotelCollection);
-        console.log(hotel);
+        trackPromise(
+          updateHotel().then((result)=> {
+            history.push(routerLinks.hotelCollection);
+          }
+        ));       
       } else {
         showEditHotelFormErrors(formValidationResult);
       }
@@ -76,7 +79,10 @@ const HotelEditContainerInner = (props: Props) => {
     const hotelApi = hotelEntityVmToApi(hotel);
     console.log(hotelApi);
     const putApiUrl = `${baseApirUrl}/api/hotels/${hotel.id}`;
-    Axios.patch(putApiUrl, hotelApi, {headers: {"Content-Type": "application/json"}});
+    setTimeout(()=> {
+      
+    })
+    return Axios.patch(putApiUrl, hotelApi, {headers: {"Content-Type": "application/json"}});
   }
 
   const showEditHotelFormErrors = (formValidationResult: FormValidationResult) => {
@@ -105,6 +111,7 @@ const HotelEditContainerInner = (props: Props) => {
         variant="error"
         handleClose={onSnackbarError}
       />
+      <LoadingIndicator/>
     </>
   );
 };
