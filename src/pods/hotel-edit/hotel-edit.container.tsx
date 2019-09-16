@@ -78,11 +78,11 @@ const HotelEditContainerInner = (props: Props) => {
   const updateHotel = () => {
     const hotelApi = hotelEntityVmToApi(hotel);
     console.log(hotelApi);
-    const putApiUrl = `${baseApirUrl}/api/hotels/${hotel.id}`;
+    const patchApiUrl = `${baseApirUrl}/api/hotels/${hotel.id}`;
     setTimeout(()=> {
       
     })
-    return Axios.patch(putApiUrl, hotelApi, {headers: {"Content-Type": "application/json"}});
+    return Axios.patch(patchApiUrl, hotelApi, {headers: {"Content-Type": "application/json"}});
   }
 
   const showEditHotelFormErrors = (formValidationResult: FormValidationResult) => {
